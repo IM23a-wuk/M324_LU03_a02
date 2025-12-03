@@ -1,0 +1,32 @@
+/*
+Pipeline Part 04 Exercise a02
+*/
+pipeline {
+  environment {
+    // this entry has to be created on your dockerhub-account
+    DOCKER_IMAGE = "readydocker1/m324_lu03_a02"
+    // this is the key in Jenkins
+    DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
+  }
+  agent any
+  stages {
+    stage('Cloning Repo') {
+            steps {
+              script {
+                  //your repo branch
+                  git branch: 'main', url: 'https://github.com/IM23a-wuk/M324_LU03_a02.git'
+           }
+         }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIALS_ID) {
+            def customImage = docker.build(DOCKER_IMAGE, "-f backend/Dockerfile .")
+            customImage.push()
+          }
+        }
+      }
+    }
+  }
+}
