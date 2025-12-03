@@ -4,7 +4,7 @@ Pipeline Part 04 Exercise a02
 pipeline {
   environment {
     // this entry has to be created on your dockerhub-account
-    DOCKER_IMAGE = "mkw68mkw/m324_lu03_a02"
+    DOCKER_IMAGE = "mkw68mkw/docker-test"
     // this is the key in Jenkins
     DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
   }
@@ -30,4 +30,5 @@ pipeline {
     }
   }
 }
+
 
